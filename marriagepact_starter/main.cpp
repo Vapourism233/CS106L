@@ -34,12 +34,17 @@ std::unordered_set<std::string> get_applicants(std::string filename) {
 
 std::queue<std::string*> find_matches(std::set<std::string> &students) {
     // TODO: Implement this function.
+    std::queue<std::string*> matches;
+    for(auto it = students.begin(); it != students.end(); it++){
+        std::string* student = new std::string(*it);
+        matches.push(student);
+    }
 }
 
 
 
 int main() {
     // Your code goes here. Don't forget to print your true love!
-    std::string filename = ""
+    std::string filename = "";
     return 0;
 }
