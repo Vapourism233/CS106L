@@ -34,17 +34,27 @@ std::unordered_set<std::string> get_applicants(std::string filename) {
 
 std::queue<std::string*> find_matches(std::set<std::string> &students) {
     // TODO: Implement this function.
-    std::queue<std::string*> matches;
+    //From the set, take all names that share your initials and place pointers to them in a new std::queue.
+    std::queue<std::string*> matches; 
+    std::string initials = "JL";
     for(auto it = students.begin(); it != students.end(); it++){
-        std::string* student = new std::string(*it);
-        matches.push(student);
+        if(it->at(0) == initials[0] && it->at(1) == initials[1]){
+            matches.push(const_cast<std::string*> (&(*it))); // matches cannot push const string* so we need to cast it to string*
     }
+    return matches;
 }
 
 
 
 int main() {
     // Your code goes here. Don't forget to print your true love!
-    std::string filename = "";
+    std::unordered_set<std::string> applicants = get_applicants("students.txt");
+    std::set<std::string> students(applicants.begin(), applicants.end());
+    std::queue<std::string*> matches = find_matches(students);
+    while(!matches.empty()){
+        std::cout << *matches.front() << std::endl;
+        matches.pop();
+    }
+
     return 0;
 }
